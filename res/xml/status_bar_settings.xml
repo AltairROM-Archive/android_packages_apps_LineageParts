@@ -54,10 +54,10 @@
 
     </PreferenceCategory>
 
-<!--
     <PreferenceCategory
         android:title="@string/status_bar_clock_title">
 
+<!--
         <lineageos.preference.LineageSystemSettingListPreference
             android:key="status_bar_clock"
             android:title="@string/status_bar_clock_position_title"
@@ -66,6 +66,7 @@
             android:entries="@array/status_bar_clock_position_entries"
             android:entryValues="@array/status_bar_clock_position_values"
             android:defaultValue="0" />
+-->
 
         <lineageos.preference.LineageSystemSettingListPreference
             android:key="status_bar_am_pm"
@@ -74,10 +75,11 @@
             android:dialogTitle="@string/status_bar_am_pm_title"
             android:entries="@array/status_bar_am_pm_entries"
             android:entryValues="@array/status_bar_am_pm_values"
-            android:defaultValue="2" />
+            android:defaultValue="1" />
 
     </PreferenceCategory>
 
+<!--
     <PreferenceCategory
         android:title="@string/status_bar_battery_title">
 
