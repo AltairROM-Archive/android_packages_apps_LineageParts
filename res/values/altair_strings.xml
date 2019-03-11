@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Status bar - Quick settings -->
+    <string name="status_bar_qs_title">Quick Settings</string>
+    <string name="qs_rows_portrait_title">Tiles rows on portrait</string>
+    <string name="qs_rows_landscape_title">Tiles rows on landscape</string>
+    <string name="qs_columns_portrait_title">Tiles columns on portrait</string>
+    <string name="qs_columns_landscape_title">Tiles columns on landscape</string>
+
+</resources>

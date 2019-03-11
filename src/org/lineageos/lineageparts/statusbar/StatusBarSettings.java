@@ -17,6 +17,7 @@
 package org.lineageos.lineageparts.statusbar;
 
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -31,6 +32,7 @@ import lineageos.providers.LineageSettings;
 
 import org.lineageos.lineageparts.R;
 import org.lineageos.lineageparts.SettingsPreferenceFragment;
+import org.lineageos.lineageparts.widget.CustomSeekBarPreference;
 
 public class StatusBarSettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
@@ -44,6 +46,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
     private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
     private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "qs_quick_pulldown";
+    private static final String STATUS_BAR_QS_ROWS_PORTRAIT = "qs_rows_portrait";
+    private static final String STATUS_BAR_QS_ROWS_LANDSCAPE = "qs_rows_landscape";
+    private static final String STATUS_BAR_QS_COLUMNS_PORTRAIT = "qs_columns_portrait";
+    private static final String STATUS_BAR_QS_COLUMNS_LANDSCAPE = "qs_columns_landscape";
 
     private static final int STATUS_BAR_BATTERY_STYLE_HIDDEN = 4;
     private static final int STATUS_BAR_BATTERY_STYLE_TEXT = 6;
@@ -54,6 +60,11 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private static final String NETWORK_TRAFFIC_SETTINGS = "network_traffic_settings";
 
     private LineageSystemSettingListPreference mQuickPulldown;
+    private CustomSeekBarPreference mQsRowsPort;
+    private CustomSeekBarPreference mQsRowsLand;
+    private CustomSeekBarPreference mQsColumnsPort;
+    private CustomSeekBarPreference mQsColumnsLand;
+
     private LineageSystemSettingListPreference mStatusBarClock;
     private LineageSystemSettingListPreference mStatusBarAmPm;
     private LineageSystemSettingListPreference mStatusBarBattery;
@@ -100,6 +111,30 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                 (LineageSystemSettingListPreference) findPreference(STATUS_BAR_QUICK_QS_PULLDOWN);
         mQuickPulldown.setOnPreferenceChangeListener(this);
         updateQuickPulldownSummary(mQuickPulldown.getIntValue(0));
+
+        int value = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.QS_ROWS_PORTRAIT, 3, UserHandle.USER_CURRENT);
+        mQsRowsPort = (CustomSeekBarPreference) findPreference("qs_rows_portrait");
+        mQsRowsPort.setValue(value);
+        mQsRowsPort.setOnPreferenceChangeListener(this);
+
+        value = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.QS_ROWS_LANDSCAPE, 2, UserHandle.USER_CURRENT);
+        mQsRowsLand = (CustomSeekBarPreference) findPreference("qs_rows_landscape");
+        mQsRowsLand.setValue(value);
+        mQsRowsLand.setOnPreferenceChangeListener(this);
+
+        value = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.QS_COLUMNS_PORTRAIT, 5, UserHandle.USER_CURRENT);
+        mQsColumnsPort = (CustomSeekBarPreference) findPreference("qs_columns_portrait");
+        mQsColumnsPort.setValue(value);
+        mQsColumnsPort.setOnPreferenceChangeListener(this);
+
+        value = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.QS_COLUMNS_LANDSCAPE, 5, UserHandle.USER_CURRENT);
+        mQsColumnsLand = (CustomSeekBarPreference) findPreference("qs_columns_landscape");
+        mQsColumnsLand.setValue(value);
+        mQsColumnsLand.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -147,20 +182,36 @@ public class StatusBarSettings extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        int value = Integer.parseInt((String) newValue);
+        //int value = Integer.parseInt((String) newValue);
         String key = preference.getKey();
         switch (key) {
             case STATUS_BAR_QUICK_QS_PULLDOWN:
-                updateQuickPulldownSummary(value);
+                updateQuickPulldownSummary(Integer.parseInt((String) newValue));
                 break;
             case STATUS_BAR_CLOCK_STYLE:
-                updateNetworkTrafficStatus(value);
+                updateNetworkTrafficStatus(Integer.parseInt((String) newValue));
                 break;
 /*
             case STATUS_BAR_BATTERY_STYLE:
                 enableStatusBarBatteryDependents(value);
                 break;
 */
+            case STATUS_BAR_QS_ROWS_PORTRAIT:
+                Settings.System.putIntForUser(getContext().getContentResolver(),
+                        Settings.System.QS_ROWS_PORTRAIT, (Integer) newValue, UserHandle.USER_CURRENT);
+                break;
+            case STATUS_BAR_QS_ROWS_LANDSCAPE:
+                Settings.System.putIntForUser(getContext().getContentResolver(),
+                        Settings.System.QS_ROWS_LANDSCAPE, (Integer) newValue, UserHandle.USER_CURRENT);
+                break;
+            case STATUS_BAR_QS_COLUMNS_PORTRAIT:
+                Settings.System.putIntForUser(getContext().getContentResolver(),
+                        Settings.System.QS_COLUMNS_PORTRAIT, (Integer) newValue, UserHandle.USER_CURRENT);
+                break;
+            case STATUS_BAR_QS_COLUMNS_LANDSCAPE:
+                Settings.System.putIntForUser(getContext().getContentResolver(),
+                        Settings.System.QS_COLUMNS_LANDSCAPE, (Integer) newValue, UserHandle.USER_CURRENT);
+                break;
         }
         return true;
     }
