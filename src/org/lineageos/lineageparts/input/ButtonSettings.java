@@ -385,9 +385,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         // Only show the navigation bar category on devices that have a navigation bar
         // or support disabling the hardware keys
-        if (!hasNavigationBar && !supportsKeyDisabler) {
+        //if (!hasNavigationBar && !supportsKeyDisabler) {
             prefScreen.removePreference(mNavigationPreferencesCat);
-        }
+        //}
 
         final ButtonBacklightBrightness backlight =
                 (ButtonBacklightBrightness) findPreference(KEY_BUTTON_BACKLIGHT);
