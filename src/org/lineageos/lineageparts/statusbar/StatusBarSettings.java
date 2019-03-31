@@ -16,6 +16,7 @@
  */
 package org.lineageos.lineageparts.statusbar;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -25,6 +26,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.text.format.DateFormat;
 import android.text.TextUtils;
+import android.util.ArraySet;
 import android.view.View;
 
 import lineageos.preference.LineageSystemSettingListPreference;
@@ -32,10 +34,14 @@ import lineageos.providers.LineageSettings;
 
 import org.lineageos.lineageparts.R;
 import org.lineageos.lineageparts.SettingsPreferenceFragment;
+import org.lineageos.lineageparts.search.BaseSearchIndexProvider;
+import org.lineageos.lineageparts.search.Searchable;
 import org.lineageos.lineageparts.widget.CustomSeekBarPreference;
 
+import java.util.Set;
+
 public class StatusBarSettings extends SettingsPreferenceFragment
-        implements OnPreferenceChangeListener {
+        implements OnPreferenceChangeListener, Searchable {
 
     private static final String CATEGORY_CLOCK = "status_bar_clock_key";
 
@@ -73,7 +79,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private PreferenceCategory mStatusBarClockCategory;
     private PreferenceScreen mNetworkTrafficPref;
 
-    private boolean mHasNotch;
+    private static boolean sHasNotch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,10 +88,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment
 
         mNetworkTrafficPref = (PreferenceScreen) findPreference(NETWORK_TRAFFIC_SETTINGS);
 
-        mHasNotch = getResources().getBoolean(
+        sHasNotch = getResources().getBoolean(
                 org.lineageos.platform.internal.R.bool.config_haveNotch);
 
-        if (mHasNotch) {
+        if (sHasNotch) {
             getPreferenceScreen().removePreference(mNetworkTrafficPref);
         }
 
@@ -155,7 +161,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
         }
 
-        final boolean disallowCenteredClock = mHasNotch || getNetworkTrafficStatus() != 0;
+        final boolean disallowCenteredClock = sHasNotch || getNetworkTrafficStatus() != 0;
 
         // Adjust status bar preferences for RTL
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
@@ -243,7 +249,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     }
 
     private void updateNetworkTrafficStatus(int clockPosition) {
-        if (mHasNotch) {
+        if (sHasNotch) {
             // Unconditional no network traffic for you
             return;
         }
@@ -265,4 +271,18 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         return LineageSettings.System.getInt(getActivity().getContentResolver(),
                 STATUS_BAR_CLOCK_STYLE, 2);
     }
+
+    public static final Searchable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+
+        @Override
+        public Set<String> getNonIndexableKeys(Context context) {
+            final Set<String> result = new ArraySet<String>();
+
+            if (sHasNotch) {
+                result.add(NETWORK_TRAFFIC_SETTINGS);
+            }
+            return result;
+        }
+    };
 }
