@@ -86,6 +86,12 @@
             android:title="@string/network_traffic_settings_title"
             android:summary="@string/network_traffic_settings_summary" />
 
+        <lineageos.preference.SystemSettingSwitchPreference
+            android:key="data_activity_arrows"
+            android:title="@string/data_wifi_activity_arrows_title"
+            android:summary="@string/data_wifi_activity_arrows_summary"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

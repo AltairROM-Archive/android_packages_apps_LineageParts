@@ -8,4 +8,8 @@
     <string name="qs_columns_portrait_title">Tiles columns on portrait</string>
     <string name="qs_columns_landscape_title">Tiles columns on landscape</string>
 
+    <!-- Status bar - Status bar icons -->
+    <string name="data_wifi_activity_arrows_title">Mobile/wifi activity</string>
+    <string name="data_wifi_activity_arrows_summary">Display arrows on icons to indicate data activity</string>
+
 </resources>
