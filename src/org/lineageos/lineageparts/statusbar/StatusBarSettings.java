@@ -207,7 +207,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                 updateNetworkTrafficStatus(Integer.parseInt((String) newValue));
                 break;
             case STATUS_BAR_BATTERY_STYLE:
-                enableStatusBarBatteryDependents(value);
+                enableStatusBarBatteryDependents(Integer.parseInt((String) newValue));
                 break;
             case STATUS_BAR_QS_ROWS_PORTRAIT:
                 Settings.System.putIntForUser(getContext().getContentResolver(),
