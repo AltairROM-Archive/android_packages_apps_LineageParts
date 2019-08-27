@@ -119,25 +119,6 @@
                 android:resource="@string/live_display_summary" />
         </activity-alias>
 
-        <!-- Button settings (System category) -->
-        <activity-alias
-            android:name=".input.ButtonSettings"
-            android:label="@string/button_pref_title"
-            android:icon="@drawable/ic_settings_buttons"
-            android:targetActivity="PartsActivity">
-            <intent-filter android:priority="256">
-                <action android:name="org.lineageos.lineageparts.action.SETTINGS" />
-                <action android:name="org.lineageos.lineageparts.BUTTON_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data
-                android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.system" />
-            <meta-data
-                android:name="com.android.settings.summary"
-                android:value="@string/summary_empty" />
-        </activity-alias>
-
         <activity android:name=".gestures.KeyHandler" />
 
         <!-- Profiles settings (System category) -->
