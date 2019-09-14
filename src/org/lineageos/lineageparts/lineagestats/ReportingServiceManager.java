@@ -100,7 +100,7 @@ public class ReportingServiceManager extends BroadcastReceiver {
 
     private static void migrate(Context context, SharedPreferences prefs) {
         Utilities.setStatsCollectionEnabled(context,
-                prefs.getBoolean(AnonymousStats.ANONYMOUS_OPT_IN, true));
+                prefs.getBoolean(AnonymousStats.ANONYMOUS_OPT_IN, false));
         prefs.edit().remove(AnonymousStats.ANONYMOUS_OPT_IN).commit();
     }
 
