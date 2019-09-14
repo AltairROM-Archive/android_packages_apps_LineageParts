@@ -86,7 +86,7 @@ public class Utilities {
      */
     public static boolean isStatsCollectionEnabled(Context context) {
         return LineageSettings.Secure.getInt(context.getContentResolver(),
-                LineageSettings.Secure.STATS_COLLECTION, 1) != 0;
+                LineageSettings.Secure.STATS_COLLECTION, 0) != 0;
     }
 
     /**
