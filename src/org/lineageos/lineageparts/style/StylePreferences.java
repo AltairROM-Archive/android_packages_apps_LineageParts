@@ -204,7 +204,7 @@ public class StylePreferences extends SettingsPreferenceFragment {
     private void setupStylePref() {
         int preference = LineageSettings.System.getInt(getContext().getContentResolver(),
                 LineageSettings.System.BERRY_GLOBAL_STYLE,
-                StyleInterface.STYLE_GLOBAL_AUTO_WALLPAPER);
+                StyleInterface.STYLE_GLOBAL_LIGHT);
         String handlerPackage = LineageSettings.System.getString(getContext().getContentResolver(),
                 LineageSettings.System.BERRY_MANAGED_BY_APP);
 
@@ -243,7 +243,7 @@ public class StylePreferences extends SettingsPreferenceFragment {
 
     private void recoverStyleFromBadPackage() {
         // The package that was handling the styles is no longer available, reset to default
-        onStyleChange(mStylePref, StyleInterface.STYLE_GLOBAL_AUTO_WALLPAPER);
+        onStyleChange(mStylePref, StyleInterface.STYLE_GLOBAL_LIGHT);
     }
 
     private void applyStyle(Suggestion suggestion) {
