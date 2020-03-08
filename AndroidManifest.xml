@@ -101,22 +101,23 @@
             </intent-filter>
         </provider>
 
-        <!-- LiveDisplay settings (Display category) -->
+        <!-- Button settings (System category) -->
         <activity-alias
-            android:name=".livedisplay.LiveDisplaySettings"
-            android:label="@*lineageos.platform:string/live_display_title"
+            android:name=".input.ButtonSettings"
+            android:label="@string/button_pref_title"
+            android:icon="@drawable/ic_settings_buttons"
             android:targetActivity="PartsActivity">
-            <intent-filter android:priority="-2">
+            <intent-filter android:priority="256">
                 <action android:name="org.lineageos.lineageparts.action.SETTINGS" />
-                <action android:name="org.lineageos.lineageparts.LIVEDISPLAY_SETTINGS" />
+                <action android:name="org.lineageos.lineageparts.BUTTON_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data
                 android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.display" />
+                android:value="com.android.settings.category.ia.system" />
             <meta-data
                 android:name="com.android.settings.summary"
-                android:resource="@string/live_display_summary" />
+                android:value="@string/summary_empty" />
         </activity-alias>
 
         <activity android:name=".gestures.KeyHandler" />
