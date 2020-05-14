@@ -25,7 +25,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import androidx.preference.CheckBoxPreference;
+import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 
 import org.lineageos.internal.util.PowerMenuConstants;
@@ -42,10 +42,10 @@ import static org.lineageos.internal.util.PowerMenuConstants.*;
 public class PowerMenuActions extends SettingsPreferenceFragment {
     final static String TAG = "PowerMenuActions";
 
-    private CheckBoxPreference mScreenshotPref;
-    private CheckBoxPreference mAirplanePref;
-    private CheckBoxPreference mUsersPref;
-    private CheckBoxPreference mLockDownPref;
+    private SwitchPreference mScreenshotPref;
+    private SwitchPreference mAirplanePref;
+    private SwitchPreference mUsersPref;
+    private SwitchPreference mLockDownPref;
 
     Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
