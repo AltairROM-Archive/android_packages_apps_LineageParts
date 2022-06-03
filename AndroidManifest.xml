@@ -113,6 +113,7 @@
         </activity-alias>
 
         <!-- Button settings (System category) -->
+        <!--
         <activity-alias
             android:name=".input.ButtonSettings"
             android:label="@string/button_pref_title"
@@ -141,6 +142,7 @@
                 android:name="com.android.settings.summary"
                 android:resource="@string/summary_empty" />
         </activity-alias>
+        -->
 
         <activity android:name=".gestures.KeyHandler" />
 
